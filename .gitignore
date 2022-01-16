@@ -1,0 +1,11 @@
+!\d{3,4}[a-zA-Z]\.cpp
+
+*.cpp~
+*~
+*.o
+*/
+a
+in
+*.txt
+^\#
+!cp_solution/
