@@ -7,8 +7,6 @@ using namespace std::chrono;
 #define ll long long
 #define all(v) v.begin(), v.end()
 
-#define INT_MAX 1e9
-
 void run() {
   int n,k;
 
@@ -18,15 +16,15 @@ void run() {
     cout<<-1<<endl; 
   }
 
-  int arr[n];
+  int stones[n];
 
 
   for(int i=0;i<n;i++ ) {
-  	cin>>arr[i];
+  	cin>>stones[i];
   }
 
-  // Initilize dp array. dp[i][j] contains the minimum cost of the 
-  // merging stones from arr[i] to arr[j]
+  // Initilize dp stonesay. dp[i][j] contains the minimum cost of the 
+  // merging stones from stones[i] to stones[j]
 
   int dp[n][n];
 
@@ -34,24 +32,33 @@ void run() {
   int prefix_sum[n+1];
 
   for(int i=0;i<n;i++) {
-  	prefix_sum[i+1] = prefix_sum[i] + arr[i]; 
+  	prefix_sum[i+1] = prefix_sum[i] + stones[i]; 
+  }
+
+
+  for(int i=0;i<n;i++) {
+    for(int j=0;j<n;j++) {
+      dp[i][j] = 0;
+    }
   }
 
   // Iterate through dp and calculate dp[i][j]
   for(int l=k-1;l<n;l++) {
  	 for(int i=0,j=i+l;i<n && j<n;i++,j++) {
 
-        // if k = n-1, dp[i][j] = arr[i] + arr[i+1] +... + a[j]
- 	 	    if(l=k-1) {
-          dp[i][j] = prefix_sum[y+1] - prefix_sum[i];
+        // if k = n-1, dp[i][j] = stones[i] + stones[i+1] +... + a[j]
+ 	 	    if(l==k-1) {
+          dp[i][j] = prefix_sum[j+1] - prefix_sum[i];
         } else {
           dp[i][j] = INT_MAX;
           for(int mid = i; mid<j;mid+=k-1) {
             dp[i][j] = min(dp[i][j], dp[i][mid] + dp[mid+1][j]);
           }
 
-          if(l%k-1 == 0) {
-            dp[i][j] == prefix_sum[y+1] - prefix_sum[i];
+          if(l%(k-1) == 0) {
+
+            cout<<i<<" "<<j<<" "<<l<<endl;
+            dp[i][j] += prefix_sum[j+1] - prefix_sum[i];
           }
         }
     }
