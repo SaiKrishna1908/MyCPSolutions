@@ -7,7 +7,7 @@ using namespace std::chrono;
 #define ll long long
 #define all(v) v.begin(), v.end()
 
-const int INF = 1e7+7;
+const ll INF = 1e15+7;
 
 // int getMin(int *arr) {
 //   int minx = arr[0];
@@ -53,7 +53,7 @@ void run() {
   }
 
   for(int i=1;i<n;i++) {      
-    for(int j=0;j<k;j++) {      
+    for(int j=1;j<=k;j++) {      
 
       if (i-j >= 0) {                        
         dp[i][j-1] = min(dp[i][j-1], minDp[i-j] + (long) abs(h[i] - h[i-j]));                
@@ -65,8 +65,13 @@ void run() {
     }       
   }
 
+  for(int i=0;i<n;i++) {
+    cout<<minDp[i]<<endl;
+
+  }
+
   // cout<<endl;
-  cout<<minDp[n-1]<<endl;
+  // cout<<minDp[n-1]<<endl;
 }
 
 int main() {
