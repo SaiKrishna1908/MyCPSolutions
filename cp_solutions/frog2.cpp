@@ -7,33 +7,66 @@ using namespace std::chrono;
 #define ll long long
 #define all(v) v.begin(), v.end()
 
+const int INF = 1e7+7;
 
+// int getMin(int *arr) {
+//   int minx = arr[0];
+//   for(int i=1;i<arr.size();i++) {
+//     if (arr[i] < minx) {
+//       minx = arr[i];
+//     }
+//   }
+
+//   return minx;
+// }
 void run() {
   
   int n,k;
 
   cin>>n>>k;
 
-  vector<int> h(n);
+  vector<long> h(n);
 
   for(int i=0;i<n;i++) {
        cin>>h[i];
   }
 
   // The thing that matters is where we are and how we got there.
-  vector<vector<int>> dp(n, vector<int>(k,0));
+  vector<vector<long>> dp(n, vector<long>(k));
 
-  // Dp state state represent the minimum cost to arrive at stone i
-//   fill(dp.begin(), dp.end(), 0);
+ 
+  for(int i=0;i<n;i++) {
+    for(int j=0;j<k;j++) {
+      dp[i][j] = INF;
+    }
+  }
 
-//   dp[0] = 0;
-//   dp[1] = abs(h[1]-h[0]);
+  
+  dp[0][0] = 0;
 
-//   for(int i=2;i<n;i++) {
-//     dp[i] = min(dp[i-1] + abs(h[i] - h[i-1]) , dp[i-2] + (abs(h[i] - h[i-2])));
-//   }
+  vector<long> minDp(n);
+  
+  minDp[0] = 0;
 
-//   cout<<dp[n-1];
+  for(int i=1;i<n;i++) {
+    minDp[i] = INF;
+  }
+
+  for(int i=1;i<n;i++) {      
+    for(int j=0;j<k;j++) {      
+
+      if (i-j >= 0) {                        
+        dp[i][j-1] = min(dp[i][j-1], minDp[i-j] + (long) abs(h[i] - h[i-j]));                
+      } 
+    } 
+
+    for(int j=1;j<=k;j++) {
+      minDp[i] = min(minDp[i], dp[i][j-1]);
+    }       
+  }
+
+  // cout<<endl;
+  cout<<minDp[n-1]<<endl;
 }
 
 int main() {
