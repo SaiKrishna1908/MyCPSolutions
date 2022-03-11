@@ -65,13 +65,9 @@ void run() {
     }       
   }
 
-  for(int i=0;i<n;i++) {
-    cout<<minDp[i]<<endl;
-
-  }
 
   // cout<<endl;
-  // cout<<minDp[n-1]<<endl;
+  cout<<minDp[n-1]<<endl;
 }
 
 int main() {
