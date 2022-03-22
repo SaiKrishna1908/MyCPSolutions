@@ -13,10 +13,23 @@ using namespace std::chrono;
 ** There will be 2 states
 
 2. What does each state in my dp represent ? 
-** dp[i][j] represents the maximum 
+** dp[i][j] represents the maximum subsequence possible with string s of length s[0..i] and
+    string t of length t[0..j].
 
 3. How do we transition to new state, i.e how do we compute dp[i]  using previous values ?
+** The transition rules are as follows:
 
+  1. if s[i] == t[j] 
+
+        the following statements says that dp[i][j] 
+        is equal to 1 + maximum subsequence in s[i-1] t[j-1]
+
+        dp[i][j] = dp[i-1][j-1] + 1
+      else 
+        If they are not equal then max of dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+
+        dp[i-1][j] --> exclude i character from string s 
+        dp[i][j-1] --> exclude j character from string t
 */
 
 void display(vector<vector<int>> arr) {
@@ -27,9 +40,6 @@ void display(vector<vector<int>> arr) {
         }
         cout<<endl;
     }
-
-
-    cout<<"###########################"<<endl;
 }
 
 void run() {
@@ -38,32 +48,32 @@ void run() {
 
   vector<vector<int>> dp(s.length()+1, vector<int>(t.length()+1,0));
 
-//   fill(dp.begin(), dp.end(), 0);
+  // fill(dp.begin(), dp.end(), 0);
 
 // Why 
+  dp[0][0] = 0;
+  dp[0][1] = 0;
+  dp[1][0] = 0;
+  for(int i=1;i<=s.length();i++) {
+      for(int j=1;j<=t.length();j++) {
 
-  for(int i=0;i<s.length();i++) {
-      for(int j=0;j<t.length();j++) {
-        if(s[i] == t[j]) {
-            dp[i+1][j+1] = max(dp[i+1][j+1], dp[i][j]+1);
+        // if i
+        if(s[i-1] == t[j-1]) {
+            dp[i][j] = 1+ dp[i-1][j-1];
         }
-        dp[i][j+1] = max(dp[i][j+1], dp[i][j]);
-        dp[i+1][j] = max(dp[i+1][j], dp[i][j]);
+        else {
+          dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+        }
+        
       }
 
-    //   display(dp);
+      // display(dp);
   }
 
-  int answer = 0;
-
-  for(auto i : dp) {
-      for(auto value : i) {
-          answer = max(answer, value);
-      }
-  }
+  // display(dp);
 
 
-  cout<<answer<<endl;  
+  cout<<dp[s.length()][t.length()]<<endl;
 }
 
 int main() {
