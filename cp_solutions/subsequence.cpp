@@ -42,6 +42,22 @@ void display(vector<vector<int>> arr) {
     }
 }
 
+string ans;
+
+void print_string(vector<vector<int>> arr, string s, string t, int i, int j) {
+
+  if(i<=0 || j<=0) {
+    return;
+  }
+
+  if (s[i-1] == t[j-1]) {    
+    ans.push_back(s[i-1]);  
+    print_string(arr, s, t, i-1, j-1);
+  } else {
+    arr[i-1][j] > arr[i][j-1] ? print_string(arr,s,t,i-1,j) : print_string(arr,s,t,i,j-1);
+  }
+}
+
 void run() {
   string s,t;
   cin>>s>>t;
@@ -66,14 +82,12 @@ void run() {
         }
         
       }
-
-      // display(dp);
   }
 
-  // display(dp);
-
-
-  cout<<dp[s.length()][t.length()]<<endl;
+  // print_string(dp,s,t,s.length(), t.length());
+  // reverse(ans.begin(), ans.end());
+  // cout<<ans<<endl;
+  
 }
 
 int main() {
