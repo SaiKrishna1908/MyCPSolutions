@@ -23,8 +23,7 @@ void run() {
 
   vector<int> a;
 
-  a.push_ba
-  ck(0);
+  a.push_back(0);
   a.push_back(1);
 
   n-=2;
