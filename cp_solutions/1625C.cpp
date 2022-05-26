@@ -23,7 +23,33 @@ How will I transition to new state, ie dp[i+1] = ?
 */
 
 void run() {
-  
+  int n,l,k;
+
+  cin>>n>>l>>k;
+
+  int dp[n+1][k+1];
+
+  int d[n];
+  int a[n];
+
+
+  for(int i=0;i<n;i++) {
+    cin>>d[i];  // Coordinates of all signs
+  }
+
+  for(int i=0;i<n;i++) {
+    cin>>a[i]; // Speed limits
+  }
+
+  for(int i=0;i<n;i++) {
+    for(int j=0;j<=k;j++) {
+      for(int pos = i+1;pos<n;pos++) {
+        dp[pos][pos+j-i-1] = min(dp[pos][pos+j-i-1], dp[i][j] + (d[pos] - d[i]) * a[i]);
+      }
+    }
+  }
+
+  cout<<"Hello world"<<endl;
 }
 
 int main() {
