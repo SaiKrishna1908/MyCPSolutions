@@ -10,3 +10,6 @@ in
 !cp_solution/
 .vscode/
 .vscode/*
+cp_solutions/.vscode/launch.json
+cp_solutions/.vscode/tasks.json
+cp_solutions/a.exe
