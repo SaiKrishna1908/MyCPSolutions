@@ -7,8 +7,6 @@ using namespace std::chrono;
 #define ll long long
 #define all(v) v.begin(), v.end()
 
-ll mod = 1000000007;
-
 void print_vec(vector<int> arr) {
   for(auto itr = arr.begin(); itr!=arr.end();itr++) {
     cout<<(*itr)<<" ";
@@ -18,23 +16,36 @@ void print_vec(vector<int> arr) {
 
 
 void run() {
-  int t;
+  int n,m;
 
-  cin>>t;  
+  cin>>n>>m;
 
-  while(t-->0) {
-    ll n;
+  multiset<int> tck_price;
 
-    cin>>n;
+  
 
-    ll sum = 0;
+  for(int i=0;i<n;i++) {
+    int input;
+    cin>>input;
+    tck_price.insert(input);    
+  }  
 
-    sum = (n * (n+1))%mod;
-    sum = (sum * (4 * n - 1))%mod;
-    sum = (sum  * 337)%mod;
+  for(int i=0;i<m;i++) {
+    int m;
+
+    cin>>m;
     
-    cout<<sum<<endl;
-  }
+  
+    auto itr = tck_price.upper_bound(m);
+
+    // He cannot afford any ticket
+    if (itr == tck_price.begin()) {
+      cout<<-1<<endl;
+    } else {
+      cout<< * (--itr)<<endl;
+      tck_price.erase(itr);
+    }             
+  }  
 }
 
 int main() {
