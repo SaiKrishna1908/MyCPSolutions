@@ -92,7 +92,7 @@ void run() {
 
   cout<<"Node, Time"<<endl;
   for(auto elem : result) {
-    cout<<elem.first<<" "<<elem.second<<endl;
+    cout<<elem.first<<"\t"<<elem.second<<endl;
   }
 }
 
