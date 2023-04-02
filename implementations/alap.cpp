@@ -1,6 +1,6 @@
 /*
     Compile file
-    g++ asap.cpp -o ./a
+    g++ alap.cpp -o ./a
     run file
     ./a
 */
@@ -80,15 +80,17 @@ void run() {
 
   while(!st.empty()) {
 
-    auto current_node = nodes.at(st.top().first);
-    int current_cost = st.top().second + op_map[current_node.op];
+    auto node = st.top();
+    st.pop();
+    auto current_node = nodes.at(node.first);
+    int current_cost = node.second + op_map[current_node.op];
     max_time = max(max_time, current_cost);
     
     result[current_node.id] = max(result[current_node.id], max_time);
     for(auto neighbour: current_node.succs) {
         st.push(make_pair(neighbour, max_time));
     }
-    st.pop();
+    
   }
 
   cout<<"Node, Time"<<endl;
