@@ -1,11 +1,3 @@
-/*
-    Compile file
-    g++ asap.cpp -o ./a
-    run file
-    ./a
-*/
-
-
 #include <iostream>
 #include <bits/stdc++.h>
 
@@ -71,36 +63,35 @@ void run() {
     nodes.insert(make_pair(id, node));
   }
 
-  stack<pair<int, int>> st;
+  deque<pair<int, int>> dq;
 
-  st.push(make_pair(0, 0));
+  dq.push_back(make_pair(0, 0));
 
   int max_time = 0;
   map<int, int> result;
 
-  while(!st.empty()) {
-
-    auto current_node = nodes.at(st.top().first);
-    int current_cost = st.top().second + op_map[current_node.op];
+  while(!dq.empty()) {
+    auto current_node = nodes.at(dq.front().first);
+    int current_cost = dq.front().second + op_map[current_node.op];
     max_time = max(max_time, current_cost);
     
     result[current_node.id] = max(result[current_node.id], max_time);
     for(auto neighbour: current_node.succs) {
-        st.push(make_pair(neighbour, max_time));
+        dq.push_back(make_pair(neighbour, max_time));
     }
-    st.pop();
+    dq.pop_front();
   }
 
   cout<<"Node, Time"<<endl;
   for(auto elem : result) {
-    cout<<elem.first<<"\t"<<elem.second<<endl;
+    cout<<elem.first<<" "<<elem.second<<endl;
   }
 }
 
 int main() {
 
-  cin.tie(0);
-  cin.sync_with_stdio(false);
+  // cin.tie(0);
+  // cin.sync_with_stdio(false);
     
 
   auto start = high_resolution_clock::now();
@@ -110,5 +101,5 @@ int main() {
   auto stop = high_resolution_clock::now();
   auto duration = duration_cast<microseconds>(stop - start);
 
-  cout<<"time: "<<duration.count()/1e6<<endl;
+  // cout<<"time: "<<duration.count()/1e6<<endl;
 }

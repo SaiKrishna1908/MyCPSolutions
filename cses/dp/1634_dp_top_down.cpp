@@ -20,6 +20,22 @@ void print_vec(vector<int> arr)
   }
   cout << endl;
 }
+
+/*
+  Type: Memoization DP
+
+  Dp is used to store already computed solution
+
+  1. How many states will be there in my dp ?
+  -> 1
+
+  2. What does each state in my dp represent ?
+  -> dp[i] represents the minimum number of coins needed to form i
+
+  3. How do we transition to new state, i.e how do we compute dp[i]  using previous values ?
+  -> for coin in coins:
+  ->    steps = mins(steps, solve(n-coin))
+*/
  
 ll solve(int n)
 {  

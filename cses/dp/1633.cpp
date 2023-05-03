@@ -17,7 +17,23 @@ void print_vec(vector<int> arr) {
   }
   cout<<endl;
 }
+/*
+  Type: DP + MEMOIZATION
+  
+  This problem can be simply solved using top - down approach
+  along with memoization
 
+  1. How many states will be there in my dp ?
+  -> 1
+
+  2. What does each state in my dp represent ?
+  -> dp[i] represents number of ways i can be created by throwing a dice
+
+  3. How do we transition to new state, i.e how do we compute dp[i]  using previous values ?
+  -> for all dice outcomes:
+  ->    sum = (sum + solve(n-outcome))
+
+*/
 ll solve(int n) {
   if (n < 0) {
     return 0;
