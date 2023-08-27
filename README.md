@@ -43,75 +43,102 @@
 ## Segment Tree
 
 ```
-  struct segtree {
+struct segtree
+{
 
   int n;
 
   vector<int> t;
 
-  segtree(int N) {
+  segtree(int N)
+  {
 
-      n = N+1;
-      t.assign(4*n+1,0);
-
+    n = N + 1;
+    t.assign(4 * n + 1, 0);
   }
 
-    void build(int a[],int v,int l, int r) {
+  /*
+    v is the current vertex
+    l is the starting range of a covered by vertex v
+    r is the ending range of a coverted by vertex v
+  */
+  void build(int a[], int v, int l, int r)
+  {
 
-      if(l == r) {
-        a[v] = a[l];
-      }
+    if (l == r)
+    {
+      t[v] = a[l];
+    }
 
-      else {
-        int mid = (l+r) /2;
-        build(a,v*2, l, mid);
-        build(a,v*2+1, mid+1,r);
+    else
+    {
+      int mid = (l + r) / 2;
+      build(a, v * 2, l, mid);
+      build(a, v * 2 + 1, mid + 1, r);
 
-        a[v] = a[v*2] + a[v*2+1];
-      }
-
+      t[v] = t[v * 2] + t[v * 2 + 1];
+    }
   }
 
-  int sum(int v, int l, int r, int tl, int tr) {
+  /*
+    v is the current vertex
+    tl is the lower range converted by vertex v
+    tr is the higher range converted by vertex v
+    l is the lower range of the query
+    r is the higher range of the the query
+  */
+  int sum(int v, int tl, int tr, int l, int r)
+  {
 
-      if (l > r) {
-        return 0;
-      }
+    if (l > r)
+    {
+      return 0;
+    }
 
-      if (l==tr && r==tr) {
-        return t[v];
-      }
+    if (l == tr && r == tr)
+    {
+      return t[v];
+    }
 
-      int tm = (tl + tr) /2;
+    int tm = (tl + tr) / 2;
 
-
-      return sum(v,l,min(r,tm),tl, tm) + sum(v,max(l,tm+1),r,tm+1,tr);
-
+    return sum(v*2, tl, tm, l, min(r, tm))
+           + sum(v*2+1, tm+1, tr, max(l, tm+1), r);
   }
 
-  void update(int v, int tl,int tr, int pos, int new_val) {
+  /*
+    v is the vertex
+    tl is the lower range of the vertex
+    tr is the higher range of the vertex
+    pos is the position of the element to change
+    new_val is the new value to be updated at a[pos]
+  */
+  void update(int v, int tl, int tr, int pos, int new_val)
+  {
 
-      if(tl == tr) {
-        t[v] = new_val;
+    if (tl == tr)
+    {
+      t[v] = new_val;
+    }
+
+    else
+    {
+
+      int tm = (tl + tr) / 2;
+
+      if (pos <= tm)
+      {
+        update(v * 2, tl, tm, pos, new_val);
+      }
+      else
+      {
+        update(v * 2 + 1, tm + 1, tr, pos, new_val);
       }
 
-      else {
-
-        int tm = (tl + tr) /2;
-
-        if(pos <= tm) {
-      update(v*2, tl, tm,pos,new_val);
-        }
-        else {
-      update(v*2+1, tm+1, tr,pos,new_val);
-        }
-
-        t[v] = t[v*2] + t[v*2+1];
-      }
-
+      t[v] = t[v * 2] + t[v * 2 + 1];
+    }
   }
-
-  };
+};
 ```
 
 ## Binary Index Tree
