@@ -75,8 +75,10 @@ struct segtree
       int mid = (l + r) / 2;
       build(a, v * 2, l, mid);
       build(a, v * 2 + 1, mid + 1, r);
- 
-      t[v] = min(t[v * 2], t[v * 2 + 1]);
+
+      t[v] = t[v * 2] + t[v * 2 + 1];
+      // For min query comment above line and uncomment below line
+      // t[v] = min (t[v * 2], t[v * 2 + 1]);
     }
   }
 
@@ -110,15 +112,15 @@ struct segtree
     l is the lower range of the query
     r is the higher range of the the query
   */
-  int sum(int v, int tl, int tr, int l, int r)
+  ll sum(int v, int tl, int tr, int l, int r)
   {
  
     if (l > r)
     {
-      return MAX;
+      return 0;
     }
  
-    if (l == tr && r == tr)
+    if (l == tl && r == tr)
     {
       return t[v];
     }
@@ -137,8 +139,7 @@ struct segtree
     new_val is the new value to be updated at a[pos]
   */
   void update(int v, int tl, int tr, int pos, int new_val)
-  {
- 
+  {  
     if (tl == tr)
     {
       t[v] = new_val;
@@ -162,6 +163,17 @@ struct segtree
     }
   }
 };
+
+usage:
+
+int n;
+cin>>n;
+int a[n+1];
+
+read(a);
+
+auto s = segtree(n);
+s.build(a,1,1,n)
 ```
 
 ## Binary Index Tree

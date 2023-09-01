@@ -14,7 +14,6 @@ void print_vec(vector<int> arr) {
   cout<<endl;
 }
 
-
 void run() {
   int n;
   cin>>n;

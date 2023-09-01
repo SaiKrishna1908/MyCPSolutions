@@ -12,20 +12,22 @@ int main() {
 
     int arr[] = {2,-1,8,-4,5,-2,3};
     int size = 7;
+    // current running sum
+    int currentSum = 0;
 
-    int max_end_here = 0;
-    int max_so_far = -1e9;
+    // maximum sum we saw so far
+    int maxSoFar = -1e9;
 
     for(int i=0;i<size;i++) {
         
-        max_end_here = max_end_here + arr[i];
+        currentSum = currentSum + arr[i];
 
-        if (max_end_here < 0) {
-            max_end_here = 0;
+        if (currentSum < 0) {
+            currentSum = 0;
         } else {
-            max_so_far = max(max_so_far, max_end_here);
+            maxSoFar = max(maxSoFar, currentSum);
         }
     }
 
-    cout<<max_so_far<<endl;
+    cout<<maxSoFar<<endl;
 }
