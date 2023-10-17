@@ -324,3 +324,11 @@ int dp[n][m];
 
 fill(&dp[0][0], &dp[0][0]+sizeof(dp), -1);
 ```
+
+
+
+## Compile code with debug 
+
+```
+g++ -std=c++17 -Wshadow -Wall -o ./a .\cp_solutions\playground.cpp  -D_GLIBCXX_DEBUG -g
+```
