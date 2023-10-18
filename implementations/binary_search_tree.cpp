@@ -40,6 +40,7 @@ struct Node {
     int key;
     Node* left;
     Node* right;
+    Node* parent;
 };
 
 struct bst {
@@ -53,7 +54,7 @@ struct bst {
     Node* newNode(int item) {
         Node* temp = new Node();
         temp->key = item;
-        temp->left = temp->right - NULL;
+        temp->left = temp->right = temp->parent = NULL;        
         return temp;
     }
 
@@ -81,12 +82,27 @@ struct bst {
 
             if (temp->key > value) {
                 temp->left = nodeToInsert;
+                nodeToInsert->parent = temp;
             } else {
                 temp->right = nodeToInsert;
+                nodeToInsert->parent = temp;
             }
         }
     }
 
+    void printParentPath(Node* node) {
+        if (node->parent == nullptr) {
+            cout<<node->key;
+            return;
+        }
+
+        cout<<node->key<<"->";
+        printParentPath(node->parent);
+    }
+
+    /*
+        recusive procedure to inorder walk a binary search tree
+    */
     void recursiveInorderWalk(Node *node) {
         if (node == nullptr) {
             return;
@@ -97,6 +113,65 @@ struct bst {
         recursiveInorderWalk(node->right);
     }
 
+    /*
+        If a max exists then it will be in rightmost leaf of the subtree/tree
+    */
+    Node* findMax(Node* node) {
+        if (node->right != nullptr) {
+            return findMax(node->right);
+        }
+        return node;
+    }
+    
+    /*
+        If a min exists then it will be in leftmost leaf of the subtree/tree
+    */
+
+   Node* findMin(Node* node) {
+        if(node->left != nullptr) {
+            return findMin(node->left);
+        }
+        return node;
+   }
+
+    /*
+        Smallest key that is larger than x
+    */
+    Node* findSuccessor(Node* node) {
+        if (node->right != nullptr) {
+            return findMin(node->right);
+        }        
+
+        Node* parent = node->parent;
+        while(parent != nullptr && parent->right == node) {
+            node = parent;
+            parent = node->parent;
+        }
+        
+        return parent;
+    }
+
+    /*
+        Largest key that is smaller than x
+    */
+    Node* findPredessor(Node* node) {
+        if (node->left != nullptr) {
+            return findMax(node->left);
+        } 
+
+        auto parent = node->parent;
+
+        while(parent != nullptr && parent->left == node) {
+            node = parent;
+            parent = node->parent;
+        }
+
+        return parent;
+    }
+
+    /*
+        print tree in UNIX file format
+    */
     void printTree(Node *node, string prefix, bool isLeft) {
         if (node != nullptr) {
             cout<<prefix;
@@ -109,6 +184,16 @@ struct bst {
 
         }
     }
+
+    /*
+        Case 1: There are not children to the node 
+        Case 2: There is one child to the node
+        Case 3: There are two children to the node
+    
+    */
+    void deleteNode(Node* node) {
+        
+    }
 };
 
 void run() {
@@ -119,9 +204,16 @@ void run() {
   tree.insert(15);
   tree.insert(12);
 
-  tree.printTree(tree.root,"", false);
+//   tree.printTree(tree.root,"", false);
+//   tree.recursiveInorderWalk(tree.root);
 
-  tree.recursiveInorderWalk(tree.root);
+//   debug() << tree.findMax(tree.root);
+//   debug() << tree.findMin(tree.root);
+
+//   tree.printParentPath(tree.root->left->right->right);
+
+     debug() << tree.findSuccessor(tree.root->left->left);
+     debug() << tree.findPredessor(tree.root);
 }
 
 int main() {
