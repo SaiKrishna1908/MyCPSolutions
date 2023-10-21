@@ -188,11 +188,45 @@ struct bst {
     /*
         Case 1: There are not children to the node 
         Case 2: There is one child to the node
-        Case 3: There are two children to the node
-    
+        Case 3: There are two children to the node    
     */
     void deleteNode(Node* node) {
-        
+        if (node->left == nullptr and node->right == nullptr) {
+            auto parent = node->parent;
+            if (parent->left == node) {
+                parent->left = nullptr;
+            } else if (parent->right == node) {
+                parent->right = nullptr;
+            }
+            node->parent = nullptr;
+        } else if (node->left != nullptr and node->right != nullptr) {
+            Node* successor = node->right;
+            Node* parent = node->parent;
+
+            node->right->parent = parent;
+            node->parent = successor;
+            node->parent = nullptr;
+
+        } else if (node->left != nullptr) {
+            auto parent = node->parent;
+            if (parent->left == node) {
+                parent->left = node->left;                                
+            } else {
+                parent-> right = node->left;                
+            }
+            node->left->parent = parent;
+            node->parent=nullptr;
+        } else if (node->right != nullptr) {
+            auto parent = node->parent;
+
+            if (parent->left == node) {
+                parent->left = node->right;
+            } else {
+                parent->right = node->right;
+            }
+            node->right->parent = parent;
+            node->parent = nullptr;
+        } 
     }
 };
 
