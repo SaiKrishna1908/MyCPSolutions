@@ -40,7 +40,12 @@
 
     }
 
-## Segment Tree
+## Segment Tree 
+
+Time complexity: 
+    build: O(n)
+    query: O(log n)
+    update: O(log n)
 
 ```
 struct segtree
