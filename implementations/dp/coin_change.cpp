@@ -36,45 +36,9 @@ void print_vec(vector<int> arr) {
   cout<<endl;
 }
 
-vector<int> r(100, -1);
-
-int memoized_rod_cut(vector<int> &profits, int n) {
-  if (r[n] != -1) {
-    return r[n];
-  } 
-
-  // Base case
-  if (n == 0) {
-    return 0;
-  }
-
-  int q = profits[n];
-
-  for(int i=1;i<n;i++) {
-    q = max(q, profits[i] + memoized_rod_cut(profits, n - i));
-  }
-
-  r[n] = q;
-  return q;
-}
 
 void run() {
-  int n = 10;
-
-  vector<int> profits(n+1);
-
-  profits[1] = 1;
-  profits[2] = 5;
-  profits[3] = 8;
-  profits[4] = 9;
-  profits[5] = 10;
-  profits[6] = 17;
-  profits[7] = 17;
-  profits[8] = 20;
-  profits[9] = 24;
-  profits[10] = 30;
-
-  debug() << memoized_rod_cut(profits, 4);
+  
 }
 
 int main() {
