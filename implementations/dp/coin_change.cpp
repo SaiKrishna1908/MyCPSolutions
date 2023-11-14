@@ -38,7 +38,7 @@ void print_vec(vector<int> arr) {
 
 
 void run() {
-  
+  int coins[] = {1, 2, 10, 20, 50, 100, 500};
 }
 
 int main() {
