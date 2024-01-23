@@ -2,6 +2,11 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+using namespace std::chrono;
+
+#define ll long long
+#define all(v) v.begin(), v.end()
+#define INF 1e9+7
 
 template < class c > struct rge { c b, e; };
 template < class c > rge<c> range(c i, c j) { return rge<c>{i, j}; }
@@ -30,15 +35,41 @@ void print_vec(vector<int> arr) {
   }
   cout<<endl;
 }
-struct TreeNode {
-  TreeNode() {
 
+
+void run() {
+  string a, b;
+  cin>>a>>b;
+
+  int carry = 0;
+
+  string s;
+
+  for(int i=0;i<min(a.length(), b.length());i++) {
+    int num1 = a[i] - '0';
+    int num2 = b[i] - '0';
+
+    s.append(to_string((num1+num2+carry)%2));
+    carry = (num1 + num2)/2;        
   }
-};
 
-int main () {
-  TreeNode *other = new TreeNode();
-  cout<<(nullptr == (other))<<endl;
+  for(int i=0;i<s.length();i++) {
+    cout<<s[i];
+  }
+}
 
-  return 0;
+int main() {
+
+  // cin.tie(0);
+  // cin.sync_with_stdio(false);
+    
+
+  auto start = high_resolution_clock::now();
+  
+  run();
+  
+  auto stop = high_resolution_clock::now();
+  auto duration = duration_cast<microseconds>(stop - start);
+
+  // cout<<"time: "<<duration.count()/1e6<<endl;
 }
