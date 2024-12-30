@@ -14,3 +14,4 @@ cp_solutions/.vscode/launch.json
 cp_solutions/.vscode/tasks.json
 cp_solutions/a.exe
 *.exe
+out
