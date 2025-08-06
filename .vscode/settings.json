@@ -76,6 +76,8 @@
         "variant": "cpp",
         "ranges": "cpp",
         "span": "cpp",
-        "stacktrace": "cpp"
+        "stacktrace": "cpp",
+        "hash_map": "cpp",
+        "format": "cpp"
     }
 }
