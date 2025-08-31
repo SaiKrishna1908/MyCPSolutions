@@ -15,3 +15,5 @@ cp_solutions/.vscode/tasks.json
 cp_solutions/a.exe
 *.exe
 out
+*.class
+**/*.class
