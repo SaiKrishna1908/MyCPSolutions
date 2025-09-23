@@ -79,5 +79,9 @@
         "stacktrace": "cpp",
         "hash_map": "cpp",
         "format": "cpp"
-    }
+    },
+    "java.project.sourcePaths": [
+        "microsoft/dsa"
+    ],
+    "java.project.referencedLibraries": []
 }
