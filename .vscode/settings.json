@@ -81,7 +81,9 @@
         "format": "cpp"
     },
     "java.project.sourcePaths": [
-        "microsoft/dsa"
+        "workattech/intuit",
+        "neetcode/arrays",
+        "neetcode/strings"
     ],
     "java.project.referencedLibraries": []
 }

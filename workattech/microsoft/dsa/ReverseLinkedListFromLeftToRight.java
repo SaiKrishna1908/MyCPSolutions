@@ -49,10 +49,7 @@ public class ReverseLinkedListFromLeftToRight {
 		
 		back.next = null;
 		
-		temp1.next = reverse(temp1.next);
-		
-		// System.out.println(front.data);
-		// System.out.println(back.data);
+		temp1.next = reverse(temp1.next);			
 		
 		if (temp2 != null) {
 			temp3.next = temp2;

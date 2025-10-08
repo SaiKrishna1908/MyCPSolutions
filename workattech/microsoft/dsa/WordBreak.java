@@ -2,6 +2,20 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class WordBreak {
+    /**
+     * 1. How many states in my dp ?
+     * We will be having one state in our dp
+     * 
+     * 2. What does each state represent ?
+     * dp[i] -> can we create a string[0..i] using words[]
+     * 
+     * 3. What would be my transition ?
+     * dp[i] -> dp[0..j] == true && dp[j..i] in words
+     * 
+     * @param s
+     * @param w
+     * @return
+     */
     static boolean wordBreak(String s, String[] w) {
         Map<String, Integer> map = new HashMap<>();
 
