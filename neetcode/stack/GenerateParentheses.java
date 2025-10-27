@@ -21,7 +21,6 @@ public class GenerateParentheses {
             dfs(l, r+1, t+")", acc, n);
         }
     }
-
     public List<String> generateParenthesis(int n) {
         List<String> accumulator = new ArrayList<>();
         dfs(0, 0, "", accumulator, n);

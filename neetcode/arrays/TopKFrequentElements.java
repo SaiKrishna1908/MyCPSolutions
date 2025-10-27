@@ -5,11 +5,6 @@ public class TopKFrequentElements {
         K key;
         V value;
 
-        public Pair(K key, V value) {
-            this.key = key;
-            this.value = value;
-        }
-
         @Override
         public boolean equals(Object obj) {
             Pair other = (Pair<K,V>) obj;
