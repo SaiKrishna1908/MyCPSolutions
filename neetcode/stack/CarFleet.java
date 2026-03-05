@@ -33,10 +33,10 @@ public class CarFleet {
 
         Collections.sort(positionPair, Comparator.reverseOrder());        
 
-        Stack<Integer> stack = new Stack<>();
+        Stack<Double> stack = new Stack<>();
 
         for(int i=0;i<positionPair.size();i++) {
-            int time = (target - positionPair.get(i).position)/positionPair.get(i).speed;
+            double time = ((double)(target - positionPair.get(i).position))/positionPair.get(i).speed;
 
             if (stack.isEmpty()) {
                 stack.push(time);
