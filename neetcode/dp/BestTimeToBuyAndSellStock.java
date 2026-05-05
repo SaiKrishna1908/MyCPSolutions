@@ -1,4 +1,4 @@
-public class MaximizeProfits {
+public class BestTimeToBuyAndSellStock {
 
     private static int maxProfits(int[] prices) {
         int[][] dp = new int[prices.length][2];
